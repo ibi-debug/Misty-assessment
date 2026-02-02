@@ -1,0 +1,12 @@
+{
+  "name": "kai-funnel",
+  "private": true,
+  "scripts": {
+    "dev": "serve . -l 3000",
+    "dev:full": "vercel dev"
+  },
+  "devDependencies": {
+    "serve": "^14.2.5",
+    "vercel": "^39.0.0"
+  }
+}
