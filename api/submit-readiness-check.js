@@ -12,7 +12,9 @@
  */
 
 const THRESHOLD = 15;
-const GHL_API_BASE = 'https://rest.gohighlevel.com/v1';
+// GHL v2 API (v1 rest.gohighlevel.com is deprecated; v2 uses Lead Connector)
+const GHL_API_BASE = 'https://services.leadconnectorhq.com';
+const GHL_API_VERSION = '2021-07-28';
 
 function sanitizeString(str, maxLen = 500) {
   if (str == null || typeof str !== 'string') return '';
@@ -72,16 +74,22 @@ function splitName(fullName) {
   return { firstName: name.slice(0, space), lastName: name.slice(space + 1) };
 }
 
+function ghlHeaders(apiKey) {
+  return {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${apiKey}`,
+    Version: GHL_API_VERSION,
+  };
+}
+
 async function createGhlContact(apiKey, locationId, payload, resultCopy, customFieldScoreId, customFieldResultId) {
   const { firstName, lastName } = splitName(payload.name);
   const body = {
     locationId,
-    name: payload.name,
     firstName,
     lastName,
     email: payload.email,
-    phone: payload.phone,
-    tags: ['Readiness Check'],
+    phone: payload.phone || '',
   };
   if (customFieldScoreId || customFieldResultId) {
     body.customFields = [];
@@ -90,31 +98,48 @@ async function createGhlContact(apiKey, locationId, payload, resultCopy, customF
   }
   const res = await fetch(`${GHL_API_BASE}/contacts/`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-    },
+    headers: ghlHeaders(apiKey),
     body: JSON.stringify(body),
+  });
+  const text = await res.text();
+  if (!res.ok) {
+    throw new Error(`GHL create contact: ${res.status} ${text}`);
+  }
+  let data;
+  try {
+    data = text ? JSON.parse(text) : {};
+  } catch (_) {
+    throw new Error(`GHL create contact: invalid response ${text.slice(0, 200)}`);
+  }
+  const contactId = (data.contact && data.contact.id) || data.id || (data.data && data.data.id);
+  if (!contactId) {
+    throw new Error(`GHL create contact: no contact id in response ${text.slice(0, 300)}`);
+  }
+  return contactId;
+}
+
+async function addGhlContactTags(apiKey, contactId, tags) {
+  if (!tags || !tags.length) return;
+  const res = await fetch(`${GHL_API_BASE}/contacts/${contactId}/tags`, {
+    method: 'POST',
+    headers: ghlHeaders(apiKey),
+    body: JSON.stringify({ tags }),
   });
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`GHL create contact error: ${res.status} ${text}`);
+    console.warn('GHL add tags:', res.status, text);
   }
-  const data = await res.json();
-  return data.contact && data.contact.id ? data.contact.id : data.id;
 }
 
 async function addGhlContactToWorkflow(apiKey, contactId, workflowId) {
   const res = await fetch(`${GHL_API_BASE}/contacts/${contactId}/workflow/${workflowId}`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-    },
+    headers: ghlHeaders(apiKey),
+    body: JSON.stringify({}),
   });
+  const text = await res.text();
   if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`GHL add to workflow error: ${res.status} ${text}`);
+    throw new Error(`GHL add to workflow: ${res.status} ${text}`);
   }
 }
 
@@ -181,12 +206,17 @@ module.exports = async function handler(req, res) {
         ghlCustomFieldScoreId || null,
         ghlCustomFieldResultId || null
       );
+      await addGhlContactTags(ghlApiKey, contactId, ['Readiness Check']);
       if (ghlWorkflowId) {
         await addGhlContactToWorkflow(ghlApiKey, contactId, ghlWorkflowId);
       }
     } catch (err) {
-      console.error('GHL error:', err);
-      return res.status(500).json({ error: 'Failed to send results. Please try again.' });
+      console.error('GHL error:', err.message || err);
+      const msg = err && err.message ? String(err.message).slice(0, 200) : 'Unknown error';
+      return res.status(500).json({
+        error: 'Failed to send results. Please try again.',
+        detail: msg,
+      });
     }
   } else {
     const resendApiKey = process.env.RESEND_API_KEY;

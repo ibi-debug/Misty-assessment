@@ -101,4 +101,4 @@ To pass the score and result text into the email:
 2. Set `GHL_CUSTOM_FIELD_SCORE_ID` and `GHL_CUSTOM_FIELD_RESULT_ID` to those IDs.
 3. In your workflow email template, use the merge fields for those custom fields.
 
-**API:** The handler uses the GoHighLevel v1 API (`https://rest.gohighlevel.com/v1`). Use a Private Integration Token (Sub-Account) or the location’s OAuth access token.
+**API:** The handler uses the GoHighLevel **v2** API (`https://services.leadconnectorhq.com`, `Version: 2021-07-28`). Use a **Private Integration Token** (Sub-Account) or the location’s OAuth access token.

@@ -155,9 +155,19 @@
       body: JSON.stringify(payload)
     })
       .then(function (res) {
-        if (!res.ok) return res.text().then(function (t) { throw new Error(t || 'Something went wrong.'); });
-        showStep(4);
+        return res.text().then(function (t) {
+          if (!res.ok) {
+            var msg = t || 'Something went wrong.';
+            try {
+              var data = JSON.parse(t);
+              if (data.error) msg = data.error;
+              if (data.detail) msg = msg + ' (' + data.detail + ')';
+            } catch (_) {}
+            throw new Error(msg);
+          }
+        });
       })
+      .then(function () { showStep(4); })
       .catch(function (err) {
         if (errorForm) errorForm.textContent = err.message || 'Something went wrong. Try again.';
         if (btn) { btn.disabled = false; btn.textContent = 'Send my results'; }
