@@ -14,9 +14,9 @@ Or with name: `Your readiness results, {{contact.first_name}}`
 
 ---
 
-## HTML body (KAI yellow & fun)
+## HTML body (same style as check UI)
 
-Use this in the **HTML body** field of your GHL Send Email action. Inline styles keep it consistent across email clients.
+Use this in the **HTML body** field of your GHL Send Email action. Matches the check: card, KAI pill badge, score block with yellow left border, same typography. Inline styles for email clients.
 
 ```html
 <!DOCTYPE html>
@@ -27,30 +27,33 @@ Use this in the **HTML body** field of your GHL Send Email action. Inline styles
   <title>Your KAI Readiness Results</title>
 </head>
 <body style="margin:0; padding:0; font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #1c1917; background-color: #fffbeb;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #fffbeb; padding: 32px 16px;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #fffbeb; padding: 40px 20px;">
     <tr>
       <td align="center">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 520px; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(28,25,23,0.08); border: 1px solid #fef3c7;">
+        <!-- Card: same as check (shadow, radius, border) -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 420px; background-color: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 32px rgba(28,25,23,0.08); border: 1px solid rgba(250,204,21,0.2);">
+          <!-- Header: KAI pill + title (like welcome card) -->
           <tr>
-            <td style="padding: 28px 32px 24px 32px; background: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%); border-bottom: 2px solid #facc15;">
-              <p style="margin:0; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #ca8a04;">KAI</p>
-              <h1 style="margin: 8px 0 0 0; font-size: 24px; font-weight: 700; color: #1c1917;">Your readiness results</h1>
+            <td style="padding: 28px 32px 24px 32px; background-color: #fef9c3; border-bottom: 2px solid #facc15;">
+              <p style="margin:0; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #ca8a04; display: inline-block; padding: 6px 14px; background-color: rgba(250,204,21,0.25); border-radius: 999px;">KAI</p>
+              <h1 style="margin: 12px 0 0 0; font-size: 26px; font-weight: 800; color: #1c1917; letter-spacing: -0.02em;">Your readiness results</h1>
             </td>
           </tr>
           <tr>
             <td style="padding: 28px 32px 0 32px;">
-              <p style="margin:0 0 20px 0; font-size: 17px; color: #1c1917;">Hi {{contact.first_name}},</p>
-              <p style="margin:0 0 24px 0; font-size: 16px; color: #78716c;">Thanks for taking the readiness check. Here's what your score means.</p>
+              <p style="margin:0 0 20px 0; font-size: 17px; font-weight: 600; color: #1c1917;">Hi {{contact.first_name}},</p>
+              <p style="margin:0 0 24px 0; font-size: 16px; color: #78716c; line-height: 1.65;">Thanks for taking the readiness check. Here's what your score means.</p>
             </td>
           </tr>
+          <!-- Score block: same as pulse statement (gray bg + yellow left border) -->
           <tr>
             <td style="padding: 0 32px 24px 32px;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #fefce8; border-radius: 12px; border: 2px solid #fef08a;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #fafaf9; border-radius: 16px; border-left: 4px solid #facc15;">
                 <tr>
                   <td style="padding: 20px 24px;">
-                    <p style="margin:0 0 4px 0; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #ca8a04;">Your score</p>
-                    <p style="margin:0; font-size: 28px; font-weight: 700; color: #1c1917;">{{contact.readiness_score}}</p>
-                    <p style="margin: 12px 0 0 0; font-size: 14px; line-height: 1.6; color: #1c1917;">{{contact.readiness_result}}</p>
+                    <p style="margin:0 0 4px 0; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #ca8a04;">Your score</p>
+                    <p style="margin:0; font-size: 28px; font-weight: 800; color: #1c1917;">{{contact.readiness_score}}</p>
+                    <p style="margin: 14px 0 0 0; font-size: 14px; line-height: 1.6; font-weight: 600; color: #1c1917;">{{contact.readiness_result}}</p>
                   </td>
                 </tr>
               </table>
@@ -58,12 +61,12 @@ Use this in the **HTML body** field of your GHL Send Email action. Inline styles
           </tr>
           <tr>
             <td style="padding: 0 32px 32px 32px;">
-              <p style="margin:0 0 24px 0; font-size: 16px; color: #78716c;">No pitch — just clarity. When you're ready to explore next steps, we'll be here.</p>
+              <p style="margin:0 0 24px 0; font-size: 16px; color: #78716c; line-height: 1.65;">No pitch — just clarity. When you're ready to explore next steps, we'll be here.</p>
               <p style="margin:0; font-size: 15px; font-weight: 700; color: #1c1917;">— KAI</p>
             </td>
           </tr>
         </table>
-        <p style="margin: 24px 0 0 0; font-size: 12px; color: #a8a29e;">You received this because you completed the KAI Readiness Check.</p>
+        <p style="margin: 28px 0 0 0; font-size: 12px; color: #a8a29e;">You received this because you completed the KAI Readiness Check.</p>
       </td>
     </tr>
   </table>
@@ -87,8 +90,6 @@ Your score: {{contact.readiness_score}}
 No pitch — just clarity. When you're ready to explore next steps, we'll be here.
 
 — KAI
-```
-
 ```
 
 ---
