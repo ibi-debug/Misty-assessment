@@ -221,18 +221,18 @@ module.exports = async function handler(req, res) {
     }
   } else {
     const resendApiKey = process.env.RESEND_API_KEY;
-    const emailFrom = process.env.EMAIL_FROM || 'Boss-Free Readiness <onboarding@resend.dev>';
+    const emailFrom = process.env.EMAIL_FROM || 'KAI Readiness <onboarding@resend.dev>';
     if (!resendApiKey) {
       console.error('RESEND_API_KEY not set');
       return res.status(500).json({ error: 'Server configuration error.' });
     }
-    const subject = 'Your Boss-Free Readiness results';
+    const subject = 'Your KAI Readiness results';
     const html = `
     <p>Hi ${sanitizeString(payload.name).replace(/</g, '&lt;')},</p>
     <p>Thanks for taking the readiness check. Here’s what your score means:</p>
     <p>${copy.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
     <p>No pitch — just clarity. When you’re ready to explore next steps, we’ll be here.</p>
-    <p>— Boss-Free Blueprint</p>
+    <p>— KAI</p>
   `;
     try {
       await sendEmail(resendApiKey, emailFrom, payload.email, subject, html);
