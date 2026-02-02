@@ -102,8 +102,33 @@ body {
 .welcome-tagline {
   font-size: 1.0625rem;
   color: var(--color-text-muted);
-  margin: 0 0 var(--space-xl);
+  margin: 0 0 var(--space-l);
   line-height: 1.6;
+}
+
+.welcome-about {
+  text-align: left;
+  padding: var(--space-l);
+  margin: 0 0 var(--space-xl);
+  background: var(--color-bg-card);
+  border-radius: var(--radius);
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  box-shadow: var(--shadow);
+}
+
+.welcome-about-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-accent-dark);
+  margin: 0 0 var(--space-s);
+  letter-spacing: 0.02em;
+}
+
+.welcome-about-text {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.55;
 }
 
 .btn-welcome {
