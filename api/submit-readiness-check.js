@@ -82,7 +82,7 @@ function ghlHeaders(apiKey) {
   };
 }
 
-async function createGhlContact(apiKey, locationId, payload, resultCopy, customFieldScoreId, customFieldResultId) {
+async function upsertGhlContact(apiKey, locationId, payload, resultCopy, customFieldScoreId, customFieldResultId) {
   const { firstName, lastName } = splitName(payload.name);
   const body = {
     locationId,
@@ -96,24 +96,25 @@ async function createGhlContact(apiKey, locationId, payload, resultCopy, customF
     if (customFieldScoreId) body.customFields.push({ id: customFieldScoreId, value: String(payload.totalScore) });
     if (customFieldResultId) body.customFields.push({ id: customFieldResultId, value: resultCopy });
   }
-  const res = await fetch(`${GHL_API_BASE}/contacts/`, {
+  // Upsert: create or update by email (respects location "Allow Duplicate Contact" setting)
+  const res = await fetch(`${GHL_API_BASE}/contacts/upsert`, {
     method: 'POST',
     headers: ghlHeaders(apiKey),
     body: JSON.stringify(body),
   });
   const text = await res.text();
   if (!res.ok) {
-    throw new Error(`GHL create contact: ${res.status} ${text}`);
+    throw new Error(`GHL upsert contact: ${res.status} ${text}`);
   }
   let data;
   try {
     data = text ? JSON.parse(text) : {};
   } catch (_) {
-    throw new Error(`GHL create contact: invalid response ${text.slice(0, 200)}`);
+    throw new Error(`GHL upsert contact: invalid response ${text.slice(0, 200)}`);
   }
   const contactId = (data.contact && data.contact.id) || data.id || (data.data && data.data.id);
   if (!contactId) {
-    throw new Error(`GHL create contact: no contact id in response ${text.slice(0, 300)}`);
+    throw new Error(`GHL upsert contact: no contact id in response ${text.slice(0, 300)}`);
   }
   return contactId;
 }
@@ -198,7 +199,7 @@ module.exports = async function handler(req, res) {
     const ghlCustomFieldScoreId = process.env.GHL_CUSTOM_FIELD_SCORE_ID || '';
     const ghlCustomFieldResultId = process.env.GHL_CUSTOM_FIELD_RESULT_ID || '';
     try {
-      const contactId = await createGhlContact(
+      const contactId = await upsertGhlContact(
         ghlApiKey,
         ghlLocationId,
         payload,
