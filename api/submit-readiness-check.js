@@ -119,6 +119,19 @@ async function upsertGhlContact(apiKey, locationId, payload, resultCopy, customF
   return contactId;
 }
 
+async function removeGhlContactTags(apiKey, contactId, tags) {
+  if (!tags || !tags.length) return;
+  const res = await fetch(`${GHL_API_BASE}/contacts/${contactId}/tags`, {
+    method: 'DELETE',
+    headers: ghlHeaders(apiKey),
+    body: JSON.stringify({ tags }),
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    console.warn('GHL remove tags:', res.status, text);
+  }
+}
+
 async function addGhlContactTags(apiKey, contactId, tags) {
   if (!tags || !tags.length) return;
   const res = await fetch(`${GHL_API_BASE}/contacts/${contactId}/tags`, {
@@ -207,6 +220,8 @@ module.exports = async function handler(req, res) {
         ghlCustomFieldScoreId || null,
         ghlCustomFieldResultId || null
       );
+      // Remove then re-add tag so "Contact Tag Added" fires every time (including resubmits)
+      await removeGhlContactTags(ghlApiKey, contactId, ['Readiness Check']);
       await addGhlContactTags(ghlApiKey, contactId, ['Readiness Check']);
       if (ghlWorkflowId) {
         await addGhlContactToWorkflow(ghlApiKey, contactId, ghlWorkflowId);
