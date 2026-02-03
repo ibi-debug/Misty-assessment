@@ -14,9 +14,9 @@ Or with name: `Your assessment results, {{contact.first_name}}`
 
 ---
 
-## HTML body (same style as assessment UI)
+## HTML body (Misty brand: dark, gold, magenta)
 
-Use this in the **HTML body** field of your GHL Send Email action. Matches the assessment: card, Misty pill badge, score block with yellow left border, same typography. Inline styles for email clients.
+Use this in the **HTML body** field of your GHL Send Email action. Matches the assessment: black background, cream text, gold accents, magenta signature. Inline styles for email clients.
 
 ```html
 <!DOCTYPE html>
@@ -26,34 +26,31 @@ Use this in the **HTML body** field of your GHL Send Email action. Matches the a
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Misty Assessment Results</title>
 </head>
-<body style="margin:0; padding:0; font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #1c1917; background-color: #fffbeb;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #fffbeb; padding: 40px 20px;">
+<body style="margin:0; padding:0; font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #f0f0f0; background-color: #000000;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #000000; padding: 40px 20px;">
     <tr>
       <td align="center">
-        <!-- Card: same as check (shadow, radius, border) -->
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 420px; background-color: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 32px rgba(28,25,23,0.08); border: 1px solid rgba(250,204,21,0.2);">
-          <!-- Header: Misty pill + title (like welcome card) -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 480px; background-color: #0d0d0d; border-radius: 12px; border: 1px solid rgba(178, 148, 82, 0.4);">
           <tr>
-            <td style="padding: 28px 32px 24px 32px; background-color: #fef9c3; border-bottom: 2px solid #facc15;">
-              <p style="margin:0; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #ca8a04; display: inline-block; padding: 6px 14px; background-color: rgba(250,204,21,0.25); border-radius: 999px;">Misty</p>
-              <h1 style="margin: 12px 0 0 0; font-size: 26px; font-weight: 800; color: #1c1917; letter-spacing: -0.02em;">Your assessment results</h1>
+            <td style="padding: 28px 32px 24px 32px; border-bottom: 1px solid rgba(178, 148, 82, 0.35);">
+              <p style="margin:0; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #b29452;">Misty</p>
+              <h1 style="margin: 12px 0 0 0; font-size: 24px; font-weight: 700; color: #f0f0f0; letter-spacing: 0.02em; font-family: Georgia, serif;">Your decision profile</h1>
             </td>
           </tr>
           <tr>
             <td style="padding: 28px 32px 0 32px;">
-              <p style="margin:0 0 20px 0; font-size: 17px; font-weight: 600; color: #1c1917;">Hi {{contact.first_name}},</p>
-              <p style="margin:0 0 24px 0; font-size: 16px; color: #78716c; line-height: 1.65;">Thanks for taking the assessment. Here's what your score means.</p>
+              <p style="margin:0 0 16px 0; font-size: 17px; font-weight: 600; color: #f0f0f0;">Hi {{contact.first_name}},</p>
+              <p style="margin:0 0 24px 0; font-size: 16px; color: #a8a8a8; line-height: 1.65;">Thanks for taking the Say Yes Decision Filter. Here's your decision profile.</p>
             </td>
           </tr>
-          <!-- Score block: same as pulse statement (gray bg + yellow left border) -->
           <tr>
             <td style="padding: 0 32px 24px 32px;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #fafaf9; border-radius: 16px; border-left: 4px solid #facc15;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: rgba(255,255,255,0.04); border-radius: 12px; border-left: 3px solid #b29452;">
                 <tr>
                   <td style="padding: 20px 24px;">
-                    <p style="margin:0 0 4px 0; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #ca8a04;">Your score</p>
-                    <p style="margin:0; font-size: 28px; font-weight: 800; color: #1c1917;">{{contact.readiness_score}}</p>
-                    <p style="margin: 14px 0 0 0; font-size: 14px; line-height: 1.6; font-weight: 600; color: #1c1917;">{{contact.readiness_result}}</p>
+                    <p style="margin:0 0 4px 0; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #b29452;">Your result</p>
+                    <p style="margin:0; font-size: 22px; font-weight: 700; color: #f0f0f0; font-family: Georgia, serif;">{{contact.readiness_score}}</p>
+                    <p style="margin: 14px 0 0 0; font-size: 14px; line-height: 1.65; color: #f0f0f0;">{{contact.readiness_result}}</p>
                   </td>
                 </tr>
               </table>
@@ -61,12 +58,12 @@ Use this in the **HTML body** field of your GHL Send Email action. Matches the a
           </tr>
           <tr>
             <td style="padding: 0 32px 32px 32px;">
-              <p style="margin:0 0 24px 0; font-size: 16px; color: #78716c; line-height: 1.65;">No pitch — just clarity. When you're ready to explore next steps, we'll be here.</p>
-              <p style="margin:0; font-size: 15px; font-weight: 700; color: #1c1917;">— Misty</p>
+              <p style="margin:0 0 24px 0; font-size: 16px; color: #a8a8a8; line-height: 1.65;">No pitch — just clarity. When you're ready to explore next steps, we'll be here.</p>
+              <p style="margin:0; font-size: 15px; font-weight: 700; color: #d12e6b;">— Misty</p>
             </td>
           </tr>
         </table>
-        <p style="margin: 28px 0 0 0; font-size: 12px; color: #a8a29e;">You received this because you completed the Misty Assessment.</p>
+        <p style="margin: 28px 0 0 0; font-size: 12px; color: #666;">You received this because you completed the Misty Assessment.</p>
       </td>
     </tr>
   </table>

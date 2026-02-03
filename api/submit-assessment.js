@@ -242,13 +242,46 @@ module.exports = async function handler(req, res) {
       return res.status(500).json({ error: 'Server configuration error.' });
     }
     const subject = 'Your decision profile — Misty Assessment';
+    const copyEscaped = copy.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
     const html = `
-    <p>Hi ${sanitizeString(payload.name).replace(/</g, '&lt;')},</p>
-    <p>Thanks for taking the Say Yes Decision Filter. Here’s your decision profile:</p>
-    <div style="white-space: pre-wrap; font-family: inherit;">${copy.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>')}</div>
-    <p>No pitch — just clarity. When you’re ready to explore next steps, we’ll be here.</p>
-    <p>— Misty</p>
-  `;
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0; padding:0; font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #f0f0f0; background-color: #000000;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #000000; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 480px; background-color: #0d0d0d; border-radius: 12px; border: 1px solid rgba(178, 148, 82, 0.4);">
+          <tr>
+            <td style="padding: 28px 32px 24px 32px; border-bottom: 1px solid rgba(178, 148, 82, 0.35);">
+              <p style="margin:0; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #b29452;">Misty</p>
+              <h1 style="margin: 12px 0 0 0; font-size: 24px; font-weight: 700; color: #f0f0f0; letter-spacing: 0.02em; font-family: Georgia, serif;">Your decision profile</h1>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 28px 32px 0 32px;">
+              <p style="margin:0 0 16px 0; font-size: 17px; font-weight: 600; color: #f0f0f0;">Hi ${sanitizeString(payload.name).replace(/</g, '&lt;')},</p>
+              <p style="margin:0 0 24px 0; font-size: 16px; color: #a8a8a8; line-height: 1.65;">Thanks for taking the Say Yes Decision Filter. Here's your decision profile:</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 0 32px 24px 32px;">
+              <div style="background-color: rgba(255,255,255,0.04); border-radius: 12px; border-left: 3px solid #b29452; padding: 20px 24px; font-size: 15px; line-height: 1.65; color: #f0f0f0; white-space: pre-wrap;">${copyEscaped}</div>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 0 32px 32px 32px;">
+              <p style="margin:0 0 24px 0; font-size: 16px; color: #a8a8a8; line-height: 1.65;">No pitch — just clarity. When you're ready to explore next steps, we'll be here.</p>
+              <p style="margin:0; font-size: 15px; font-weight: 700; color: #d12e6b;">— Misty</p>
+            </td>
+          </tr>
+        </table>
+        <p style="margin: 28px 0 0 0; font-size: 12px; color: #666;">You received this because you completed the Misty Assessment.</p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
     try {
       await sendEmail(resendApiKey, emailFrom, payload.email, subject, html);
     } catch (err) {
