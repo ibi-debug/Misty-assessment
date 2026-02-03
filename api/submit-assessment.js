@@ -1,5 +1,5 @@
 /**
- * Serverless handler for Boss-Free Readiness Check submissions.
+ * Serverless handler for Misty Assessment submissions.
  * Expects: POST body { name, email, phone, dimensions, totalScore }.
  *
  * Email / CRM:
@@ -158,7 +158,7 @@ async function addGhlContactToWorkflow(apiKey, contactId, workflowId) {
 }
 
 async function storeSubmission(supabaseUrl, supabaseKey, payload) {
-  const res = await fetch(`${supabaseUrl.replace(/\/$/, '')}/rest/v1/readiness_submissions`, {
+  const res = await fetch(`${supabaseUrl.replace(/\/$/, '')}/rest/v1/assessment_submissions`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -221,8 +221,8 @@ module.exports = async function handler(req, res) {
         ghlCustomFieldResultId || null
       );
       // Remove then re-add tag so "Contact Tag Added" fires every time (including resubmits)
-      await removeGhlContactTags(ghlApiKey, contactId, ['Readiness Check']);
-      await addGhlContactTags(ghlApiKey, contactId, ['Readiness Check']);
+      await removeGhlContactTags(ghlApiKey, contactId, ['Misty Assessment']);
+      await addGhlContactTags(ghlApiKey, contactId, ['Misty Assessment']);
       if (ghlWorkflowId) {
         await addGhlContactToWorkflow(ghlApiKey, contactId, ghlWorkflowId);
       }

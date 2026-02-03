@@ -1,5 +1,5 @@
 {
-  "name": "kai-funnel",
+  "name": "misty-assessment",
   "private": true,
   "scripts": {
     "dev": "serve . -l 3000",

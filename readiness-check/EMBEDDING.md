@@ -1,6 +1,6 @@
-# Embedding the Boss-Free Readiness Check
+# Embedding the Misty Assessment
 
-The readiness check is a static page (HTML + CSS + JS). You can embed it on any landing page in two ways.
+The assessment is a static page (HTML + CSS + JS). You can embed it on any landing page in two ways.
 
 ---
 
@@ -11,7 +11,7 @@ Host the contents of the `readiness-check/` folder at a URL (e.g. `https://yourd
 ```html
 <iframe
   src="https://yourdomain.com/readiness-check/"
-  title="Boss-Free Readiness Check"
+  title="Misty Assessment"
   width="100%"
   height="800"
   style="border: none; min-height: 800px;"
@@ -19,13 +19,13 @@ Host the contents of the `readiness-check/` folder at a URL (e.g. `https://yourd
 ></iframe>
 ```
 
-**Wire-up:** The page inside the iframe uses `config.js`. Before you deploy, set `SUBMIT_ENDPOINT` in `readiness-check/config.js` to your API URL (e.g. `https://your-project.vercel.app/api/submit-readiness-check`). The iframe will then POST to that endpoint when the form is submitted.
+**Wire-up:** The page inside the iframe uses `config.js`. Before you deploy, set `SUBMIT_ENDPOINT` in `readiness-check/config.js` to your API URL (e.g. `https://your-project.vercel.app/api/submit-assessment`). The iframe will then POST to that endpoint when the form is submitted.
 
 ---
 
 ## 2. Script + container (single-page feel)
 
-If you prefer the check to render inside your existing page (no iframe), you can load the form markup via JS and inject it into a container. The check is currently built as a full page; to embed as a widget you would:
+If you prefer the assessment to render inside your existing page (no iframe), you can load the form markup via JS and inject it into a container. The assessment is currently built as a full page; to embed as a widget you would:
 
 1. Copy `readiness-check/index.html` body content (from `<main id="readiness-check-root">` through `</main>`) into a JS string or template, or serve it as a fragment and fetch it.
 2. On your landing page, include a container and scripts **in this order**:
@@ -35,14 +35,14 @@ If you prefer the check to render inside your existing page (no iframe), you can
 
 <script>
   window.READINESS_CHECK_CONFIG = {
-    SUBMIT_ENDPOINT: 'https://your-project.vercel.app/api/submit-readiness-check'
+    SUBMIT_ENDPOINT: 'https://your-project.vercel.app/api/submit-assessment'
   };
 </script>
 <link rel="stylesheet" href="https://yourdomain.com/readiness-check/styles.css">
 <script src="https://yourdomain.com/readiness-check/app.js"></script>
 ```
 
-3. Either inject the form HTML into `#readiness-check-root` with a small loader script, or use the full `index.html` in an iframe (option 1). Option 1 is recommended unless you need the check fully in-page for design reasons.
+3. Either inject the form HTML into `#readiness-check-root` with a small loader script, or use the full `index.html` in an iframe (option 1). Option 1 is recommended unless you need the assessment fully in-page for design reasons.
 
 ---
 

@@ -1,18 +1,18 @@
-# Kai Funnel – Netlify config
-# Deploy: connect repo to Netlify; build command and publish dir below serve the readiness check + API.
+# Misty Assessment – Netlify config
+# Deploy: connect repo to Netlify; build command and publish dir below serve the assessment + API.
 
 [build]
   # No build step – static HTML/CSS/JS
   publish = "."
   # Functions live in netlify/functions/ and are served at /.netlify/functions/<name>
 
-# Redirect root to readiness check (optional – remove if you use / as landing)
+# Redirect root to assessment (optional – remove if you use / as landing)
 [[redirects]]
   from = "/"
   to = "/readiness-check/"
   status = 302
 
-# SPA-style fallback for readiness-check if you add client-side routing later (optional)
+# SPA-style fallback for assessment if you add client-side routing later (optional)
 # [[redirects]]
 #   from = "/readiness-check/*"
 #   to = "/readiness-check/index.html"

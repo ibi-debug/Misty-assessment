@@ -1,6 +1,6 @@
-# Boss-Free Readiness Check – Design Spec
+# Misty Assessment – Design Spec
 
-This document defines the assessment dimensions, question copy, scale, and scoring formula. Change these values here to tweak the check without touching code.
+This document defines the assessment dimensions, question copy, scale, and scoring formula. Change these values here to tweak the assessment without touching code.
 
 ---
 

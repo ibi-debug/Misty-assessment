@@ -1,10 +1,10 @@
 /**
- * Netlify serverless function wrapper for the readiness check API.
- * Deploy to Netlify; the function runs at /.netlify/functions/submit-readiness-check.
+ * Netlify serverless function wrapper for the assessment API.
+ * Deploy to Netlify; the function runs at /.netlify/functions/submit-assessment.
  * Set env vars in Netlify: Site settings → Environment variables.
  */
 
-const apiHandler = require('../../api/submit-readiness-check.js');
+const apiHandler = require('../../api/submit-assessment.js');
 
 exports.handler = async (event) => {
   const body = event.isBase64Encoded

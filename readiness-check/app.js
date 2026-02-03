@@ -1,5 +1,5 @@
 /**
- * Readiness Pulse – step flow, slider, submit.
+ * Assessment – step flow, slider, submit.
  * Expects READINESS_CHECK_CONFIG.SUBMIT_ENDPOINT in config.js.
  */
 (function () {
