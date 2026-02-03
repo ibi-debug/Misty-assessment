@@ -1,38 +1,93 @@
 /**
- * Assessment – step flow, slider, submit.
+ * Misty Assessment – Say Yes Decision Filter.
+ * 10 multiple-choice questions (A/B/C/D), result = one of 4 decision states.
  * Expects READINESS_CHECK_CONFIG.SUBMIT_ENDPOINT in config.js.
  */
 (function () {
-  var DIMENSION_IDS = ['incomeFlexibility', 'timeAutonomy', 'skillLeverage', 'riskTolerance', 'missionAlignment'];
+  var RESULT_KEYS = ['pausedYes', 'overthinkingYes', 'almostYes', 'activatedYes'];
+  var ANSWER_TO_RESULT = { A: 'pausedYes', B: 'overthinkingYes', C: 'almostYes', D: 'activatedYes' };
 
   var QUESTIONS = [
-    { dimension: 'incomeFlexibility', qIndex: 0, text: 'I could adjust my spending for 6–12 months to pursue something new without jeopardizing my family’s security.' },
-    { dimension: 'incomeFlexibility', qIndex: 1, text: 'I have some savings or flexibility that would allow me to invest time or money in a side path.' },
-    { dimension: 'incomeFlexibility', qIndex: 2, text: 'My household could tolerate a temporary dip in income if it meant building toward something I believe in.' },
-    { dimension: 'timeAutonomy', qIndex: 0, text: 'I have at least 5–10 hours per week I could redirect toward something new without harming my current commitments.' },
-    { dimension: 'timeAutonomy', qIndex: 1, text: 'I have some control over when and where I work (schedule, location, or both).' },
-    { dimension: 'timeAutonomy', qIndex: 2, text: 'I could protect a few hours each week for learning or building something alongside my current role.' },
-    { dimension: 'skillLeverage', qIndex: 0, text: 'My skills could create value in more than one context (e.g. my employer and a side project or community).' },
-    { dimension: 'skillLeverage', qIndex: 1, text: 'I have experience or expertise that others would pay for or benefit from outside my current job.' },
-    { dimension: 'skillLeverage', qIndex: 2, text: 'I’m curious about ways to use what I already know in new settings rather than starting from zero.' },
-    { dimension: 'riskTolerance', qIndex: 0, text: 'I’m open to building something alongside my current role rather than an all-or-nothing leap.' },
-    { dimension: 'riskTolerance', qIndex: 1, text: 'I’m willing to try something new even if it might not work out.' },
-    { dimension: 'riskTolerance', qIndex: 2, text: 'I prefer exploring options and optionality over waiting for a single “perfect” moment.' },
-    { dimension: 'missionAlignment', qIndex: 0, text: 'I think about impact and optionality even when my current situation is generally fine.' },
-    { dimension: 'missionAlignment', qIndex: 1, text: 'I sometimes wonder whether there’s more I could do with my skills and time.' },
-    { dimension: 'missionAlignment', qIndex: 2, text: 'I’m drawn to the idea of building something that matters to me, not just earning a paycheck.' }
+    { id: 1, text: 'An opportunity lights you up. 48 hours later, you\'re:', options: [
+      { value: 'A', label: 'Still excited but haven\'t moved' },
+      { value: 'B', label: 'Researching alternatives or gathering more info' },
+      { value: 'C', label: 'Planning when you\'ll start' },
+      { value: 'D', label: 'Already taking action' }
+    ]},
+    { id: 2, text: 'Right now, the biggest thing slowing your momentum is:', options: [
+      { value: 'A', label: 'Fear of choosing wrong' },
+      { value: 'B', label: 'Feeling like you need more clarity first' },
+      { value: 'C', label: 'Starting things you don\'t finish' },
+      { value: 'D', label: 'Honestly? Not much—I\'m moving' }
+    ]},
+    { id: 3, text: 'Which statement lands hardest?', options: [
+      { value: 'A', label: '"I know what I want but I\'m waiting to feel certain"' },
+      { value: 'B', label: '"I keep refining the plan instead of executing it"' },
+      { value: 'C', label: '"I start strong but lose steam"' },
+      { value: 'D', label: '"I move even when it\'s messy"' }
+    ]},
+    { id: 4, text: 'After making a big decision, you typically feel:', options: [
+      { value: 'A', label: 'Relief... followed by doubt' },
+      { value: 'B', label: 'Mentally exhausted' },
+      { value: 'C', label: 'Energized... then pulled in other directions' },
+      { value: 'D', label: 'Grounded and clear' }
+    ]},
+    { id: 5, text: 'When something doesn\'t work right away, your instinct is to:', options: [
+      { value: 'A', label: 'Question whether you made the right call' },
+      { value: 'B', label: 'Reopen the decision and reconsider options' },
+      { value: 'C', label: 'Delay or deprioritize the next step' },
+      { value: 'D', label: 'Adjust your approach and keep going' }
+    ]},
+    { id: 6, text: 'Someone asks about your big goal. You:', options: [
+      { value: 'A', label: 'Keep it vague or say "I\'m exploring"' },
+      { value: 'B', label: 'Explain the concept but not what you\'re doing' },
+      { value: 'C', label: 'Talk about your plan' },
+      { value: 'D', label: 'Talk about what you\'re already building' }
+    ]},
+    { id: 7, text: 'How many decisions are you currently sitting on?', options: [
+      { value: 'A', label: 'Too many to count' },
+      { value: 'B', label: 'A few major ones' },
+      { value: 'C', label: 'One that keeps coming back up' },
+      { value: 'D', label: 'Very few—I decide quickly' }
+    ]},
+    { id: 8, text: 'Your relationship with confidence is:', options: [
+      { value: 'A', label: 'I\'m capable, but I wait for the "right time"' },
+      { value: 'B', label: 'I trust logic more than intuition' },
+      { value: 'C', label: 'I believe in myself but hesitate anyway' },
+      { value: 'D', label: 'Confidence comes from taking action' }
+    ]},
+    { id: 9, text: 'Which sentence hits you in the chest?', options: [
+      { value: 'A', label: '"I\'m waiting until I feel ready"' },
+      { value: 'B', label: '"I need to understand this better first"' },
+      { value: 'C', label: '"I know what to do—I just haven\'t done it"' },
+      { value: 'D', label: '"I decide, then I figure it out"' }
+    ]},
+    { id: 10, text: 'Finish this sentence instinctively: If I fully trusted myself, I would:', options: [
+      { value: 'A', label: 'Stop waiting for permission' },
+      { value: 'B', label: 'Decide faster and stop second-guessing' },
+      { value: 'C', label: 'Actually follow through' },
+      { value: 'D', label: 'Go all in without hesitation' }
+    ]}
   ];
 
-  var TOTAL_PULSES = QUESTIONS.length;
+  var RESULT_COPY = {
+    pausedYes: 'THE PAUSED YES\n"I feel the pull, but I\'m waiting for something before I claim it."\n\nYou sense what\'s next. You know the move. But you\'re waiting—for readiness, for certainty, for permission.\nHere\'s the truth: none of those come first.\n\nYou\'re not indecisive. You\'re just choosing not to choose. And that hesitation? It\'s training your brain that decisions are dangerous, that momentum requires certainty, that clarity comes before commitment.\nIt doesn\'t.\n\nThe Reframe:\nClarity doesn\'t come before the decision. The decision creates the clarity.\n\nThe Truth You Need:\nIndecision is a decision. You\'re already deciding—just not in your favor.\n\nWhat Changes Everything:\nStop waiting to "feel ready." Ready is a place you arrive at by deciding. Choose once. Then protect that choice from your doubt.',
+    overthinkingYes: 'THE OVERTHINKING YES\n"If I just understood this better, then I could move."\n\nYou\'re brilliant. And your intelligence is keeping you stuck.\nYou analyze instead of execute. You research instead of commit. You mistake thinking for progress. You reopen decisions that were already made because "new information" always feels relevant.\nBut here\'s what\'s actually happening: you\'re using your mind to protect yourself from risk.\nAnd in doing so, you\'re avoiding the one thing that creates momentum: a closed decision.\n\nThe Reframe:\nInformation informs. Decisions transform.\n\nThe Truth You Need:\nYour next level isn\'t waiting on more clarity. It\'s waiting on you to stop needing it.\n\nWhat Changes Everything:\nSet a decision deadline. Gather input until that moment—then close the loop. No new data after that point. Decide with what you have. You\'ll learn more in 48 hours of action than 6 months of analysis.',
+    almostYes: 'THE ALMOST YES\n"I decide emotionally—but I don\'t protect the decision."\n\nYou don\'t struggle to start. You struggle to sustain.\nYou say YES with your whole chest. Then life happens. Distractions creep in. Energy dips. And because your decision wasn\'t anchored to a structure, it evaporates.\nThis isn\'t a discipline problem. It\'s a decision architecture problem.\nYou\'re making emotional commitments without building the container that holds them. So your yeses leak. Your momentum scatters. And you end up feeling like you can\'t trust yourself—when really, you just need better scaffolding.\n\nThe Reframe:\nIntensity doesn\'t build momentum. Structure does.\n\nThe Truth You Need:\nDeciding once isn\'t enough. You have to keep deciding—and that requires systems, standards, and boundaries around your yes.\n\nWhat Changes Everything:\nAfter you decide, immediately answer: What does protecting this decision look like? Then build that. Calendar it. Communicate it. Remove competing priorities. Your decision needs a defense system.',
+    activatedYes: 'THE ACTIVATED YES\n"I decide. I move. I adjust as I go."\n\nYou don\'t wait for perfect clarity. You trust action to teach you.\nYou make decisions quickly, self-correct without drama, and lead yourself with confidence. Your relationship with momentum is healthy. You know that deciding is a skill—and you\'ve built it.\nHere\'s your edge:\nYour next evolution isn\'t about motivation or discipline. It\'s about precision.\nThe more refined your decisions, the faster they compound. The clearer your standards, the less energy you waste. The sharper your focus, the bigger your impact.\n\nThe Reframe:\nGood decision-makers move fast. Great decision-makers move intentionally.\n\nThe Truth You Need:\nYou\'re already winning. Now it\'s about raising the standard of what you say YES to—and being ruthless about what you say NO to.\n\nWhat Changes Everything:\nAudit your open loops. Anything you\'re tolerating, delaying, or "sort of" doing—close it or cut it.\nYour momentum accelerates when your decisions are clean.'
+  };
+
+  var TOTAL_QUESTIONS = QUESTIONS.length;
   var currentStep = 0;
-  var currentPulseIndex = 0;
+  var currentQuestionIndex = 0;
 
   var flow = document.getElementById('pulse-flow');
   var payloadForm = document.getElementById('payload-form');
   var pulseStatement = document.getElementById('pulse-statement');
-  var pulseSlider = document.getElementById('pulse-slider');
   var pulseProgressText = document.getElementById('pulse-progress-text');
   var pulseProgressFill = document.getElementById('pulse-progress-fill');
+  var pulseOptions = document.getElementById('pulse-options');
+  var btnPulseNext = document.getElementById('btn-pulse-next');
 
   function getConfig() {
     return (typeof READINESS_CHECK_CONFIG !== 'undefined' && READINESS_CHECK_CONFIG) ? READINESS_CHECK_CONFIG : {};
@@ -49,34 +104,56 @@
     }
   }
 
-  function getRadioValue(dimension, qIndex) {
-    var name = dimension + '_' + qIndex;
+  function getAnswer(qNum) {
+    var name = 'q' + qNum;
     var checked = payloadForm ? payloadForm.querySelector('input[name="' + name + '"]:checked') : null;
-    return checked ? parseInt(checked.value, 10) : null;
+    return checked ? checked.value : null;
   }
 
-  function setRadioValue(dimension, qIndex, value) {
-    var name = dimension + '_' + qIndex;
+  function setAnswer(qNum, value) {
+    var name = 'q' + qNum;
     var input = payloadForm ? payloadForm.querySelector('input[name="' + name + '"][value="' + value + '"]') : null;
     if (input) input.checked = true;
   }
 
-  function renderPulse() {
-    var q = QUESTIONS[currentPulseIndex];
+  function renderQuestion() {
+    var q = QUESTIONS[currentQuestionIndex];
     if (pulseStatement) pulseStatement.textContent = q.text;
-    var val = getRadioValue(q.dimension, q.qIndex);
-    if (pulseSlider) {
-      pulseSlider.value = val !== null ? val : 3;
-    }
-    if (pulseProgressText) pulseProgressText.textContent = (currentPulseIndex + 1) + ' of ' + TOTAL_PULSES;
-    var pct = ((currentPulseIndex + 1) / TOTAL_PULSES) * 100;
+    if (pulseProgressText) pulseProgressText.textContent = (currentQuestionIndex + 1) + ' of ' + TOTAL_QUESTIONS;
+    var pct = ((currentQuestionIndex + 1) / TOTAL_QUESTIONS) * 100;
     if (pulseProgressFill) pulseProgressFill.style.width = pct + '%';
+
+    if (pulseOptions) {
+      pulseOptions.innerHTML = '';
+      var selected = getAnswer(q.id);
+      q.options.forEach(function (opt) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'pulse-option' + (selected === opt.value ? ' selected' : '');
+        btn.setAttribute('data-value', opt.value);
+        btn.setAttribute('aria-checked', selected === opt.value ? 'true' : 'false');
+        btn.setAttribute('role', 'radio');
+        btn.textContent = opt.label;
+        btn.addEventListener('click', function () {
+          setAnswer(q.id, opt.value);
+          pulseOptions.querySelectorAll('.pulse-option').forEach(function (b) {
+            b.classList.remove('selected');
+            b.setAttribute('aria-checked', 'false');
+          });
+          btn.classList.add('selected');
+          btn.setAttribute('aria-checked', 'true');
+          if (btnPulseNext) btnPulseNext.disabled = false;
+        });
+        pulseOptions.appendChild(btn);
+      });
+    }
+    if (btnPulseNext) btnPulseNext.disabled = !getAnswer(q.id);
   }
 
   function goToStep(stepIndex) {
     if (stepIndex === 2) {
-      currentPulseIndex = 0;
-      renderPulse();
+      currentQuestionIndex = 0;
+      renderQuestion();
     }
     showStep(stepIndex);
   }
@@ -103,37 +180,47 @@
     return valid;
   }
 
-  function getDimensionScores() {
-    var dimensions = {};
-    DIMENSION_IDS.forEach(function (dimId) {
-      var sum = 0, count = 0;
-      for (var qi = 0; qi < 3; qi++) {
-        var v = getRadioValue(dimId, qi);
-        if (v !== null) { sum += v; count++; }
+  function computeResult() {
+    var counts = { A: 0, B: 0, C: 0, D: 0 };
+    for (var i = 1; i <= 10; i++) {
+      var a = getAnswer(i);
+      if (a && counts.hasOwnProperty(a)) counts[a]++;
+    }
+    var order = ['A', 'B', 'C', 'D'];
+    var maxCount = 0;
+    var winner = 'D';
+    for (var j = 0; j < order.length; j++) {
+      var letter = order[j];
+      if (counts[letter] >= maxCount) {
+        maxCount = counts[letter];
+        winner = letter;
       }
-      dimensions[dimId] = count > 0 ? Math.round((sum / count) * 10) / 10 : 0;
-    });
-    return dimensions;
+    }
+    var resultType = ANSWER_TO_RESULT[winner];
+    return { resultType: resultType, resultCopy: RESULT_COPY[resultType] || '' };
   }
 
-  function getTotalScore(dimensions) {
-    var total = 0;
-    DIMENSION_IDS.forEach(function (dimId) { total += dimensions[dimId] || 0; });
-    return Math.round(total * 10) / 10;
+  function getAnswers() {
+    var answers = {};
+    for (var i = 1; i <= 10; i++) {
+      var a = getAnswer(i);
+      if (a) answers['q' + i] = a;
+    }
+    return answers;
   }
 
   function buildPayload() {
     var name = document.getElementById('name');
     var email = document.getElementById('email');
     var phone = document.getElementById('phone');
-    var dimensions = getDimensionScores();
-    var totalScore = getTotalScore(dimensions);
+    var result = computeResult();
     return {
       name: (name && name.value) ? name.value.trim() : '',
       email: (email && email.value) ? email.value.trim() : '',
       phone: (phone && phone.value) ? phone.value.trim() : '',
-      dimensions: dimensions,
-      totalScore: totalScore
+      answers: getAnswers(),
+      resultType: result.resultType,
+      resultCopy: result.resultCopy
     };
   }
 
@@ -174,50 +261,35 @@
       });
   }
 
-  // Begin
   var btnBegin = document.getElementById('btn-begin');
   if (btnBegin) btnBegin.addEventListener('click', function () { goToStep(1); });
 
-  // Lead next
   var btnLeadNext = document.getElementById('btn-lead-next');
   if (btnLeadNext) btnLeadNext.addEventListener('click', function () {
     if (!validateLead()) return;
     goToStep(2);
   });
 
-  // Slider sync
-  if (pulseSlider) {
-    pulseSlider.addEventListener('input', function () {
-      var q = QUESTIONS[currentPulseIndex];
-      if (q) setRadioValue(q.dimension, q.qIndex, parseInt(pulseSlider.value, 10));
-    });
-  }
-
-  // Pulse next
-  var btnPulseNext = document.getElementById('btn-pulse-next');
   if (btnPulseNext) btnPulseNext.addEventListener('click', function () {
-    var q = QUESTIONS[currentPulseIndex];
-    if (q) setRadioValue(q.dimension, q.qIndex, parseInt(pulseSlider.value, 10));
-    if (currentPulseIndex < TOTAL_PULSES - 1) {
-      currentPulseIndex++;
-      renderPulse();
+    var q = QUESTIONS[currentQuestionIndex];
+    if (currentQuestionIndex < TOTAL_QUESTIONS - 1) {
+      currentQuestionIndex++;
+      renderQuestion();
     } else {
       showStep(3);
     }
   });
 
-  // Pulse back
   var btnPulseBack = document.getElementById('btn-pulse-back');
   if (btnPulseBack) btnPulseBack.addEventListener('click', function () {
-    if (currentPulseIndex > 0) {
-      currentPulseIndex--;
-      renderPulse();
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      renderQuestion();
     } else {
       goToStep(1);
     }
   });
 
-  // Submit
   var btnSubmit = document.getElementById('btn-submit');
   if (btnSubmit) btnSubmit.addEventListener('click', submitPayload);
 

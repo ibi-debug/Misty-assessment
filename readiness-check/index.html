@@ -15,11 +15,11 @@
     <section class="step step-welcome step-active" id="step-welcome" data-step="0">
       <div class="card welcome-inner">
         <p class="welcome-label">Misty</p>
-        <h1 class="welcome-title">Your Assessment</h1>
-        <p class="welcome-tagline">Not a quiz. Not a survey. Just 15 short statements — tap how true each one feels. Your snapshot lands in your inbox.
+        <h1 class="welcome-title">The Say Yes Decision Filter</h1>
+        <p class="welcome-tagline">You don't have a motivation problem. You don't have a discipline problem. You have a decision pattern. And it's quietly sabotaging your momentum.</p>
         <div class="welcome-about">
-          <p class="welcome-about-title">What this check is about</p>
-          <p class="welcome-about-text">We look at five areas: income flexibility, time autonomy, skill leverage, risk tolerance, and mission alignment. Your answers give you a quick snapshot of where you stand — whether you’re ready to explore more leverage and options, or in a season where clarity in one area matters most. No judgment, no pitch. Just a pulse.</p>
+          <p class="welcome-about-title">This 2-minute assessment reveals</p>
+          <p class="welcome-about-text">Your exact decision pattern (most people have no idea). Why momentum keeps stalling even when you "know what to do." The one reframe that unlocks everything. Answer instinctively. Don't deliberate. Your gut reaction is the truth.</p>
         </div>
         <button type="button" class="btn btn-primary btn-welcome" id="btn-begin">Begin</button>
       </div>
@@ -28,7 +28,7 @@
     <!-- Step 1: Lead capture -->
     <section class="step step-lead" id="step-lead" data-step="1">
       <div class="card lead-inner">
-        <p class="lead-label">Where should we send your snapshot?</p>
+        <p class="lead-label">Where should we send your decision profile?</p>
         <form id="readiness-form" novalidate>
           <div class="field">
             <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your name">
@@ -47,22 +47,16 @@
       </div>
     </section>
 
-    <!-- One pulse at a time (15 questions) -->
+    <!-- One question at a time (10 multiple-choice) -->
     <section class="step step-pulse" id="step-pulse" data-step="2">
       <div class="card pulse-inner">
         <div class="pulse-progress" aria-hidden="true">
-          <span class="pulse-progress-text" id="pulse-progress-text">1 of 15</span>
+          <span class="pulse-progress-text" id="pulse-progress-text">1 of 10</span>
           <div class="pulse-progress-bar"><div class="pulse-progress-fill" id="pulse-progress-fill"></div></div>
         </div>
-        <p class="pulse-prompt" id="pulse-prompt">How true is this for you?</p>
+        <p class="pulse-prompt" id="pulse-prompt">Choose the option that fits you best</p>
         <p class="pulse-statement" id="pulse-statement"></p>
-        <div class="pulse-scale" role="group" aria-label="Scale 1 to 5">
-          <input type="range" id="pulse-slider" min="1" max="5" value="3" aria-label="How true">
-          <div class="pulse-scale-labels">
-            <span>Not really</span>
-            <span>Very much</span>
-          </div>
-        </div>
+        <div class="pulse-options" id="pulse-options" role="radiogroup" aria-label="Answer options"></div>
         <div class="pulse-actions">
           <button type="button" class="btn btn-ghost" id="btn-pulse-back">Back</button>
           <button type="button" class="btn btn-primary" id="btn-pulse-next">Next</button>
@@ -74,8 +68,8 @@
     <section class="step step-submit" id="step-submit" data-step="3">
       <div class="card submit-inner">
         <p class="submit-label">You’re done</p>
-        <h2 class="submit-title">Your snapshot is ready</h2>
-        <p class="submit-desc">We’ll send a short note on what it means — no pitch, just clarity.</p>
+        <h2 class="submit-title">Your decision profile is ready</h2>
+        <p class="submit-desc">We’ll send your full profile and the reframe that unlocks everything — no pitch, just clarity.</p>
         <button type="button" class="btn btn-primary btn-submit" id="btn-submit">Send my results</button>
         <span class="error form-error" id="error-form" role="alert"></span>
       </div>
@@ -86,28 +80,23 @@
       <div class="card thank-you-inner">
         <div class="thank-you-icon" aria-hidden="true"></div>
         <h2 class="thank-you-title">Check your inbox</h2>
-        <p class="thank-you-desc">Your snapshot is on its way. We’ve sent a short note on what your pulse means — no pitch, just clarity. 🎯</p>
+        <p class="thank-you-desc">Your full decision profile is on its way — your exact pattern, the hidden cost, and the one reframe that changes everything. 🎯</p>
       </div>
     </section>
   </main>
 
-  <!-- Hidden radios for form payload (same 15 questions, same names) -->
+  <!-- Hidden radios for form payload (10 questions, A/B/C/D) -->
   <form id="payload-form" style="display:none;" aria-hidden="true">
-    <input type="radio" name="incomeFlexibility_0" value="1"><input type="radio" name="incomeFlexibility_0" value="2"><input type="radio" name="incomeFlexibility_0" value="3"><input type="radio" name="incomeFlexibility_0" value="4"><input type="radio" name="incomeFlexibility_0" value="5">
-    <input type="radio" name="incomeFlexibility_1" value="1"><input type="radio" name="incomeFlexibility_1" value="2"><input type="radio" name="incomeFlexibility_1" value="3"><input type="radio" name="incomeFlexibility_1" value="4"><input type="radio" name="incomeFlexibility_1" value="5">
-    <input type="radio" name="incomeFlexibility_2" value="1"><input type="radio" name="incomeFlexibility_2" value="2"><input type="radio" name="incomeFlexibility_2" value="3"><input type="radio" name="incomeFlexibility_2" value="4"><input type="radio" name="incomeFlexibility_2" value="5">
-    <input type="radio" name="timeAutonomy_0" value="1"><input type="radio" name="timeAutonomy_0" value="2"><input type="radio" name="timeAutonomy_0" value="3"><input type="radio" name="timeAutonomy_0" value="4"><input type="radio" name="timeAutonomy_0" value="5">
-    <input type="radio" name="timeAutonomy_1" value="1"><input type="radio" name="timeAutonomy_1" value="2"><input type="radio" name="timeAutonomy_1" value="3"><input type="radio" name="timeAutonomy_1" value="4"><input type="radio" name="timeAutonomy_1" value="5">
-    <input type="radio" name="timeAutonomy_2" value="1"><input type="radio" name="timeAutonomy_2" value="2"><input type="radio" name="timeAutonomy_2" value="3"><input type="radio" name="timeAutonomy_2" value="4"><input type="radio" name="timeAutonomy_2" value="5">
-    <input type="radio" name="skillLeverage_0" value="1"><input type="radio" name="skillLeverage_0" value="2"><input type="radio" name="skillLeverage_0" value="3"><input type="radio" name="skillLeverage_0" value="4"><input type="radio" name="skillLeverage_0" value="5">
-    <input type="radio" name="skillLeverage_1" value="1"><input type="radio" name="skillLeverage_1" value="2"><input type="radio" name="skillLeverage_1" value="3"><input type="radio" name="skillLeverage_1" value="4"><input type="radio" name="skillLeverage_1" value="5">
-    <input type="radio" name="skillLeverage_2" value="1"><input type="radio" name="skillLeverage_2" value="2"><input type="radio" name="skillLeverage_2" value="3"><input type="radio" name="skillLeverage_2" value="4"><input type="radio" name="skillLeverage_2" value="5">
-    <input type="radio" name="riskTolerance_0" value="1"><input type="radio" name="riskTolerance_0" value="2"><input type="radio" name="riskTolerance_0" value="3"><input type="radio" name="riskTolerance_0" value="4"><input type="radio" name="riskTolerance_0" value="5">
-    <input type="radio" name="riskTolerance_1" value="1"><input type="radio" name="riskTolerance_1" value="2"><input type="radio" name="riskTolerance_1" value="3"><input type="radio" name="riskTolerance_1" value="4"><input type="radio" name="riskTolerance_1" value="5">
-    <input type="radio" name="riskTolerance_2" value="1"><input type="radio" name="riskTolerance_2" value="2"><input type="radio" name="riskTolerance_2" value="3"><input type="radio" name="riskTolerance_2" value="4"><input type="radio" name="riskTolerance_2" value="5">
-    <input type="radio" name="missionAlignment_0" value="1"><input type="radio" name="missionAlignment_0" value="2"><input type="radio" name="missionAlignment_0" value="3"><input type="radio" name="missionAlignment_0" value="4"><input type="radio" name="missionAlignment_0" value="5">
-    <input type="radio" name="missionAlignment_1" value="1"><input type="radio" name="missionAlignment_1" value="2"><input type="radio" name="missionAlignment_1" value="3"><input type="radio" name="missionAlignment_1" value="4"><input type="radio" name="missionAlignment_1" value="5">
-    <input type="radio" name="missionAlignment_2" value="1"><input type="radio" name="missionAlignment_2" value="2"><input type="radio" name="missionAlignment_2" value="3"><input type="radio" name="missionAlignment_2" value="4"><input type="radio" name="missionAlignment_2" value="5">
+    <input type="radio" name="q1" value="A"><input type="radio" name="q1" value="B"><input type="radio" name="q1" value="C"><input type="radio" name="q1" value="D">
+    <input type="radio" name="q2" value="A"><input type="radio" name="q2" value="B"><input type="radio" name="q2" value="C"><input type="radio" name="q2" value="D">
+    <input type="radio" name="q3" value="A"><input type="radio" name="q3" value="B"><input type="radio" name="q3" value="C"><input type="radio" name="q3" value="D">
+    <input type="radio" name="q4" value="A"><input type="radio" name="q4" value="B"><input type="radio" name="q4" value="C"><input type="radio" name="q4" value="D">
+    <input type="radio" name="q5" value="A"><input type="radio" name="q5" value="B"><input type="radio" name="q5" value="C"><input type="radio" name="q5" value="D">
+    <input type="radio" name="q6" value="A"><input type="radio" name="q6" value="B"><input type="radio" name="q6" value="C"><input type="radio" name="q6" value="D">
+    <input type="radio" name="q7" value="A"><input type="radio" name="q7" value="B"><input type="radio" name="q7" value="C"><input type="radio" name="q7" value="D">
+    <input type="radio" name="q8" value="A"><input type="radio" name="q8" value="B"><input type="radio" name="q8" value="C"><input type="radio" name="q8" value="D">
+    <input type="radio" name="q9" value="A"><input type="radio" name="q9" value="B"><input type="radio" name="q9" value="C"><input type="radio" name="q9" value="D">
+    <input type="radio" name="q10" value="A"><input type="radio" name="q10" value="B"><input type="radio" name="q10" value="C"><input type="radio" name="q10" value="D">
   </form>
 
   <script src="config.js"></script>

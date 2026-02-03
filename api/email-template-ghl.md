@@ -52,8 +52,8 @@ Use this in the **HTML body** field of your GHL Send Email action. Matches the a
                 <tr>
                   <td style="padding: 20px 24px;">
                     <p style="margin:0 0 4px 0; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #ca8a04;">Your score</p>
-                    <p style="margin:0; font-size: 28px; font-weight: 800; color: #1c1917;">{{contact.assessment_score}}</p>
-                    <p style="margin: 14px 0 0 0; font-size: 14px; line-height: 1.6; font-weight: 600; color: #1c1917;">{{contact.assessment_result}}</p>
+                    <p style="margin:0; font-size: 28px; font-weight: 800; color: #1c1917;">{{contact.readiness_score}}</p>
+                    <p style="margin: 14px 0 0 0; font-size: 14px; line-height: 1.6; font-weight: 600; color: #1c1917;">{{contact.readiness_result}}</p>
                   </td>
                 </tr>
               </table>
@@ -83,9 +83,9 @@ Hi {{contact.first_name}},
 
 Thanks for taking the assessment. Here's what your score means:
 
-Your score: {{contact.assessment_score}}
+Your score: {{contact.readiness_score}}
 
-{{contact.assessment_result}}
+{{contact.readiness_result}}
 
 No pitch — just clarity. When you're ready to explore next steps, we'll be here.
 
@@ -101,7 +101,7 @@ No pitch — just clarity. When you're ready to explore next steps, we'll be her
 - **Readiness Result:** Use the merge field for your custom field “Readiness Result”, e.g. `{{contact.readiness_result}}`.
 
 If your GHL template builder shows custom fields by ID, use the merge tag it gives you for:
-- Readiness Score (ID: `Oa9hReGWuAnVS2jhXfBP`)
-- Readiness Result (ID: `whZMIzlBx7lbIBjti2IG`)
+- Readiness Score (ID: `vsUeR56sUm1BUos3PQm3`)
+- Readiness Result (ID: `7neRXzoH0XeNKjVSgbmJ`)
 
 The API writes the numeric score and the “what your score means” paragraph into those fields when it creates the contact, so they will appear in the email once the workflow runs.

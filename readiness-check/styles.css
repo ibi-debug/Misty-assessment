@@ -269,7 +269,50 @@ body {
   border-left: 4px solid var(--color-accent);
 }
 
-/* Slider */
+/* Multiple-choice options (A/B/C/D) */
+.pulse-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  margin-bottom: var(--space-xl);
+}
+
+.pulse-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--space-m) var(--space-l);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--color-text);
+  background: #fafaf9;
+  border: 2px solid #e7e5e4;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.pulse-option:hover {
+  border-color: rgba(250, 204, 21, 0.5);
+  background: var(--color-bg-card);
+}
+
+.pulse-option:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+}
+
+.pulse-option[aria-checked="true"],
+.pulse-option.selected {
+  border-color: var(--color-accent);
+  background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+  box-shadow: 0 0 0 2px var(--color-accent-soft);
+}
+
+/* Slider (kept for reference; not used in Misty assessment) */
 .pulse-scale {
   margin-bottom: var(--space-xl);
 }

@@ -58,7 +58,7 @@ If you prefer the assessment to render inside your existing page (no iframe), yo
 If you don’t use the provided serverless function, your endpoint must:
 
 - Accept **POST** with **Content-Type: application/json**.
-- Body shape: `{ name, email, phone, dimensions, totalScore }` where `dimensions` is an object with keys `incomeFlexibility`, `timeAutonomy`, `skillLeverage`, `riskTolerance`, `missionAlignment` (numbers). `totalScore` is a number (5–25).
+- Body shape: `{ name, email, phone, answers, resultType, resultCopy }` where `answers` is an object with keys `q1`–`q10` (values `"A"`|`"B"`|`"C"`|`"D"`). `resultType` is one of `pausedYes`|`overthinkingYes`|`almostYes`|`activatedYes`. `resultCopy` is the full result text for that archetype.
 - Return **200** with a JSON body (e.g. `{ "ok": true }`) on success so the front-end shows the thank-you message. Return **4xx/5xx** and the front-end will show a generic error.
 
 You can then process the payload (e.g. send the “what your score means” email yourself, store in your CRM, etc.).

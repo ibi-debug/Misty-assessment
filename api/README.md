@@ -47,8 +47,9 @@ create table if not exists assessment_submissions (
   name text not null,
   email text not null,
   phone text not null,
-  dimensions jsonb not null,
-  total_score numeric not null,
+  answers jsonb not null,
+  result_type text not null,
+  result_copy text not null,
   created_at timestamptz default now()
 );
 
@@ -76,9 +77,9 @@ Then set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in your deployment envir
 
 The workflow does not receive the results in a separate call. **The API sends the score and result text when it creates the contact**, by writing them into the contact's **custom fields**:
 
-1. Your serverless API receives the submission (name, email, phone, totalScore, dimensions).
-2. It computes the "what your score means" text (e.g. "If you scored 15 or above, you're not dissatisfied — you're under-leveraged…").
-3. It creates a contact in GHL in **one** request that includes name, email, phone, tag `Misty Assessment`, and (if you set the env vars) **custom field values** for the score and that result text.
+1. Your serverless API receives the submission (name, email, phone, answers, resultType, resultCopy).
+2. The front-end sends the decision profile result (one of four archetypes: The Paused Yes, The Overthinking Yes, The Almost Yes, The Activated Yes) and the full result copy.
+3. It creates a contact in GHL in **one** request that includes name, email, phone, tag `Misty Assessment`, and (if you set the env vars) **custom field values**: Readiness Score = result type label (e.g. "The Paused Yes"), Readiness Result = full result copy.
 4. It adds that contact to your workflow.
 5. The workflow runs (e.g. "Contact Added to Workflow"). The "Send Email" action uses **merge fields** that read from the contact — e.g. `{{Contact.Readiness Score}}` and `{{Contact.Readiness Result}}`. Those values are the ones we just saved on the contact in step 3.
 
