@@ -14,7 +14,7 @@ Or with name: `Your assessment results, {{contact.first_name}}`
 
 ---
 
-## HTML body (Misty brand: dark, gold, magenta)
+## HTML body (brand: dark, gold, magenta)
 
 Use this in the **HTML body** field of your GHL Send Email action. Matches the assessment: black background, cream text, gold accents, magenta signature. Inline styles for email clients.
 
@@ -33,7 +33,6 @@ Use this in the **HTML body** field of your GHL Send Email action. Matches the a
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 480px; background-color: #0d0d0d; border-radius: 12px; border: 1px solid rgba(178, 148, 82, 0.4);">
           <tr>
             <td style="padding: 28px 32px 24px 32px; border-bottom: 1px solid rgba(178, 148, 82, 0.35);">
-              <p style="margin:0; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #b29452;">Misty</p>
               <h1 style="margin: 12px 0 0 0; font-size: 24px; font-weight: 700; color: #f0f0f0; letter-spacing: 0.02em; font-family: Georgia, serif;">Your decision profile</h1>
             </td>
           </tr>
@@ -59,7 +58,6 @@ Use this in the **HTML body** field of your GHL Send Email action. Matches the a
           <tr>
             <td style="padding: 0 32px 32px 32px;">
               <p style="margin:0 0 24px 0; font-size: 16px; color: #a8a8a8; line-height: 1.65;">No pitch — just clarity. When you're ready to explore next steps, we'll be here.</p>
-              <p style="margin:0; font-size: 15px; font-weight: 700; color: #d12e6b;">— Misty</p>
             </td>
           </tr>
         </table>
@@ -86,7 +84,6 @@ Your score: {{contact.readiness_score}}
 
 No pitch — just clarity. When you're ready to explore next steps, we'll be here.
 
-— Misty
 ```
 
 ---
