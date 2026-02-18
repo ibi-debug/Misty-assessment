@@ -1,7 +1,7 @@
 /**
- * Serverless handler for Misty Assessment submissions.
+ * Serverless handler for The Decision Code submissions.
  * Expects: POST body { name, email, phone, answers, resultType, resultCopy }.
- * (Say Yes Decision Filter: 10 multiple-choice questions → one of 4 decision states.)
+ * (10 multiple-choice questions → one of 4 decision states.)
  *
  * Email / CRM:
  * - Resend: RESEND_API_KEY, EMAIL_FROM. Sends the results email directly.
@@ -221,8 +221,8 @@ module.exports = async function handler(req, res) {
         ghlCustomFieldResultId || null
       );
       // Remove then re-add tag so "Contact Tag Added" fires every time (including resubmits)
-      await removeGhlContactTags(ghlApiKey, contactId, ['Misty Assessment']);
-      await addGhlContactTags(ghlApiKey, contactId, ['Misty Assessment']);
+      await removeGhlContactTags(ghlApiKey, contactId, ['The Decision Code']);
+      await addGhlContactTags(ghlApiKey, contactId, ['The Decision Code']);
       if (ghlWorkflowId) {
         await addGhlContactToWorkflow(ghlApiKey, contactId, ghlWorkflowId);
       }
@@ -236,12 +236,12 @@ module.exports = async function handler(req, res) {
     }
   } else {
     const resendApiKey = process.env.RESEND_API_KEY;
-    const emailFrom = process.env.EMAIL_FROM || 'Misty Assessment <onboarding@resend.dev>';
+    const emailFrom = process.env.EMAIL_FROM || 'The Decision Code <onboarding@resend.dev>';
     if (!resendApiKey) {
       console.error('RESEND_API_KEY not set');
       return res.status(500).json({ error: 'Server configuration error.' });
     }
-    const subject = 'Your decision profile — Misty Assessment';
+    const subject = 'Your decision profile — The Decision Code';
     const copyEscaped = copy.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
     const html = `
 <!DOCTYPE html>
@@ -261,7 +261,7 @@ module.exports = async function handler(req, res) {
           <tr>
             <td style="padding: 28px 32px 0 32px;">
               <p style="margin:0 0 16px 0; font-size: 17px; font-weight: 600; color: #f0f0f0;">Hi ${sanitizeString(payload.name).replace(/</g, '&lt;')},</p>
-              <p style="margin:0 0 24px 0; font-size: 16px; color: #a8a8a8; line-height: 1.65;">Thanks for taking the Say Yes Decision Filter. Here's your decision profile:</p>
+              <p style="margin:0 0 24px 0; font-size: 16px; color: #a8a8a8; line-height: 1.65;">Thanks for taking The Decision Code. Here's your decision profile:</p>
             </td>
           </tr>
           <tr>
@@ -276,7 +276,7 @@ module.exports = async function handler(req, res) {
             </td>
           </tr>
         </table>
-        <p style="margin: 28px 0 0 0; font-size: 12px; color: #666;">You received this because you completed the Misty Assessment.</p>
+        <p style="margin: 28px 0 0 0; font-size: 12px; color: #666;">You received this because you completed The Decision Code.</p>
       </td>
     </tr>
   </table>

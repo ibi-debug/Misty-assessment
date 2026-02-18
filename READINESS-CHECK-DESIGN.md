@@ -1,4 +1,4 @@
-# Misty Assessment – Say Yes Decision Filter (Design Spec)
+# The Decision Code (Design Spec)
 
 This document defines the assessment questions, answer options, scoring, and result copy. Based on [Assessment.md](Assessment.md).
 
@@ -6,7 +6,7 @@ This document defines the assessment questions, answer options, scoring, and res
 
 ## Overview
 
-- **Name:** The Say Yes Decision Filter Assessment
+- **Name:** The Decision Code Assessment
 - **Format:** 10 multiple-choice questions, one option per question (A, B, C, or D).
 - **Result:** One of 4 decision states (archetypes), determined by majority of answers.
 - **Answer mapping:** A = Paused Yes, B = Overthinking Yes, C = Almost Yes, D = Activated Yes.

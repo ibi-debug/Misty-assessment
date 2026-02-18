@@ -5,7 +5,7 @@
  */
 (function (global) {
   var origin = typeof window !== 'undefined' && window.location ? window.location.origin : '';
-  global.READINESS_CHECK_CONFIG = {
+  global.DECISION_CODE_CONFIG = {
     // Same-origin Netlify function; for local dev run "netlify dev" or override SUBMIT_ENDPOINT
     SUBMIT_ENDPOINT: origin ? origin + '/.netlify/functions/submit-assessment' : ''
   };

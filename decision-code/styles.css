@@ -1,4 +1,4 @@
-/* Misty Assessment – luxurious brand (black, cream, gold, magenta) */
+/* The Decision Code – luxurious brand (black, cream, gold, magenta) */
 
 :root {
   --color-text: #f0f0f0;
@@ -340,7 +340,7 @@ body {
   box-shadow: 0 0 0 2px var(--color-magenta-soft);
 }
 
-/* Slider (kept for reference; not used in Misty assessment) */
+/* Slider (kept for reference; not used in The Decision Code) */
 .pulse-scale {
   margin-bottom: var(--space-xl);
 }

@@ -1,7 +1,7 @@
 /**
- * Misty Assessment – Say Yes Decision Filter.
+ * The Decision Code.
  * 10 multiple-choice questions (A/B/C/D), result = one of 4 decision states.
- * Expects READINESS_CHECK_CONFIG.SUBMIT_ENDPOINT in config.js.
+ * Expects DECISION_CODE_CONFIG.SUBMIT_ENDPOINT in config.js.
  */
 (function () {
   var RESULT_KEYS = ['pausedYes', 'overthinkingYes', 'almostYes', 'activatedYes'];
@@ -90,7 +90,7 @@
   var btnPulseNext = document.getElementById('btn-pulse-next');
 
   function getConfig() {
-    return (typeof READINESS_CHECK_CONFIG !== 'undefined' && READINESS_CHECK_CONFIG) ? READINESS_CHECK_CONFIG : {};
+    return (typeof DECISION_CODE_CONFIG !== 'undefined' && DECISION_CODE_CONFIG) ? DECISION_CODE_CONFIG : {};
   }
 
   function showStep(stepIndex) {

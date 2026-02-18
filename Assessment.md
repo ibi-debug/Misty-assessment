@@ -1,4 +1,4 @@
-THE SAY YES DECISION FILTER ASSESSMENT
+THE DECISION CODE ASSESSMENT
 You don&#39;t have a motivation problem. You don&#39;t have a discipline problem.
 You have a decision pattern.
 And it&#39;s quietly sabotaging your momentum.

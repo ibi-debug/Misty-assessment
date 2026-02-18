@@ -1,4 +1,4 @@
-# GoHighLevel workflow – Misty Assessment results email template
+# GoHighLevel workflow – The Decision Code results email template
 
 Copy the template below into your GHL workflow **Send Email** (or **Send Template Email**) action. Replace the placeholders with your actual merge fields (e.g. `{{contact.first_name}}`, or your custom field merge tags for Assessment Score and Assessment Result).
 
@@ -7,7 +7,7 @@ Copy the template below into your GHL workflow **Send Email** (or **Send Templat
 ## Subject line
 
 ```
-Your Misty Assessment results 🎯
+Your Decision Code results 🎯
 ```
 
 Or with name: `Your assessment results, {{contact.first_name}}`
@@ -24,7 +24,7 @@ Use this in the **HTML body** field of your GHL Send Email action. Matches the a
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Misty Assessment Results</title>
+  <title>Your Decision Code Results</title>
 </head>
 <body style="margin:0; padding:0; font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #f0f0f0; background-color: #000000;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #000000; padding: 40px 20px;">
@@ -40,7 +40,7 @@ Use this in the **HTML body** field of your GHL Send Email action. Matches the a
           <tr>
             <td style="padding: 28px 32px 0 32px;">
               <p style="margin:0 0 16px 0; font-size: 17px; font-weight: 600; color: #f0f0f0;">Hi {{contact.first_name}},</p>
-              <p style="margin:0 0 24px 0; font-size: 16px; color: #a8a8a8; line-height: 1.65;">Thanks for taking the Say Yes Decision Filter. Here's your decision profile.</p>
+              <p style="margin:0 0 24px 0; font-size: 16px; color: #a8a8a8; line-height: 1.65;">Thanks for taking The Decision Code. Here's your decision profile.</p>
             </td>
           </tr>
           <tr>
@@ -63,7 +63,7 @@ Use this in the **HTML body** field of your GHL Send Email action. Matches the a
             </td>
           </tr>
         </table>
-        <p style="margin: 28px 0 0 0; font-size: 12px; color: #666;">You received this because you completed the Misty Assessment.</p>
+        <p style="margin: 28px 0 0 0; font-size: 12px; color: #666;">You received this because you completed The Decision Code.</p>
       </td>
     </tr>
   </table>

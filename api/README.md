@@ -1,6 +1,6 @@
-# Misty Assessment API
+# The Decision Code API
 
-Serverless handler for the Misty Assessment. Deploy to Vercel (or use the `api/` folder with a Vercel-compatible host).
+Serverless handler for The Decision Code. Deploy to Vercel (or use the `api/` folder with a Vercel-compatible host).
 
 ## How results are sent
 
@@ -17,7 +17,7 @@ Choose one:
 |----------|----------|-------------|
 | `EMAIL_PROVIDER` | No | Set to `resend` (default) to send email via Resend |
 | `RESEND_API_KEY` | Yes (if Resend) | Resend API key for sending result emails |
-| `EMAIL_FROM` | No | Sender address, e.g. `Misty Assessment <results@yourdomain.com>`. Defaults to Resend onboarding address |
+| `EMAIL_FROM` | No | Sender address, e.g. `The Decision Code <results@yourdomain.com>`. Defaults to Resend onboarding address |
 
 ### GoHighLevel
 
@@ -79,7 +79,7 @@ The workflow does not receive the results in a separate call. **The API sends th
 
 1. Your serverless API receives the submission (name, email, phone, answers, resultType, resultCopy).
 2. The front-end sends the decision profile result (one of four archetypes: The Paused Yes, The Overthinking Yes, The Almost Yes, The Activated Yes) and the full result copy.
-3. It creates a contact in GHL in **one** request that includes name, email, phone, tag `Misty Assessment`, and (if you set the env vars) **custom field values**: Readiness Score = result type label (e.g. "The Paused Yes"), Readiness Result = full result copy.
+3. It creates a contact in GHL in **one** request that includes name, email, phone, tag `The Decision Code`, and (if you set the env vars) **custom field values**: Readiness Score = result type label (e.g. "The Paused Yes"), Readiness Result = full result copy.
 4. It adds that contact to your workflow.
 5. The workflow runs (e.g. "Contact Added to Workflow"). The "Send Email" action uses **merge fields** that read from the contact — e.g. `{{Contact.Readiness Score}}` and `{{Contact.Readiness Result}}`. Those values are the ones we just saved on the contact in step 3.
 
@@ -87,7 +87,7 @@ So GHL gets the results because they are **stored on the contact as custom field
 
 ### When `EMAIL_PROVIDER=ghl`, the API:
 
-1. Creates a contact in GoHighLevel with name, email, phone, tag `Misty Assessment`, and (if you set them) custom fields for score and result text.
+1. Creates a contact in GoHighLevel with name, email, phone, tag `The Decision Code`, and (if you set them) custom fields for score and result text.
 2. If `GHL_WORKFLOW_ID` is set: adds that contact to that workflow. If not set: only creates the contact.
 
 Your workflow in GHL should send the “results” email when a contact is added. For example:

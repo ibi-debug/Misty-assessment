@@ -1,4 +1,4 @@
-# Misty Assessment – Netlify config
+# The Decision Code – Netlify config
 # Deploy: connect repo to Netlify; build command and publish dir below serve the assessment + API.
 
 [build]
@@ -9,11 +9,21 @@
 # Redirect root to assessment (optional – remove if you use / as landing)
 [[redirects]]
   from = "/"
-  to = "/readiness-check/"
+  to = "/decision-code/"
+  status = 302
+
+# Redirect old readiness-check URL to decision-code (keeps quiz.mistylavertu.com/readiness-check/ working)
+[[redirects]]
+  from = "/readiness-check/"
+  to = "/decision-code/"
+  status = 302
+[[redirects]]
+  from = "/readiness-check/*"
+  to = "/decision-code/:splat"
   status = 302
 
 # SPA-style fallback for assessment if you add client-side routing later (optional)
 # [[redirects]]
-#   from = "/readiness-check/*"
-#   to = "/readiness-check/index.html"
+#   from = "/decision-code/*"
+#   to = "/decision-code/index.html"
 #   status = 200
