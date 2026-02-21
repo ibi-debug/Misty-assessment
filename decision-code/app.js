@@ -151,7 +151,7 @@
   }
 
   function goToStep(stepIndex) {
-    if (stepIndex === 2) {
+    if (stepIndex === 1) {
       currentQuestionIndex = 0;
       renderQuestion();
     }
@@ -267,7 +267,7 @@
   var btnLeadNext = document.getElementById('btn-lead-next');
   if (btnLeadNext) btnLeadNext.addEventListener('click', function () {
     if (!validateLead()) return;
-    goToStep(2);
+    goToStep(3);
   });
 
   if (btnPulseNext) btnPulseNext.addEventListener('click', function () {
@@ -276,7 +276,7 @@
       currentQuestionIndex++;
       renderQuestion();
     } else {
-      showStep(3);
+      showStep(2);
     }
   });
 
@@ -286,7 +286,7 @@
       currentQuestionIndex--;
       renderQuestion();
     } else {
-      goToStep(1);
+      goToStep(0);
     }
   });
 
