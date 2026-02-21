@@ -2,21 +2,23 @@
 
 Copy the template below into your GHL workflow **Send Email** (or **Send Template Email**) action. Replace the placeholders with your actual merge fields (e.g. `{{contact.first_name}}`, or your custom field merge tags for Assessment Score and Assessment Result).
 
+**Brand:** Misty Lavertu — dark (#030303), blush gold accent (#E8B4B8), glass-style card. Inline styles for email clients.
+
 ---
 
 ## Subject line
 
 ```
-Your Decision Code results 🎯
+Your Decision Code results
 ```
 
-Or with name: `Your assessment results, {{contact.first_name}}`
+Or with name: `Your decision profile, {{contact.first_name}}`
 
 ---
 
-## HTML body (brand: dark, gold, magenta)
+## HTML body
 
-Use this in the **HTML body** field of your GHL Send Email action. Matches the assessment: black background, cream text, gold accents, magenta signature. Inline styles for email clients.
+Use this in the **HTML body** field of your GHL Send Email action.
 
 ```html
 <!DOCTYPE html>
@@ -26,30 +28,31 @@ Use this in the **HTML body** field of your GHL Send Email action. Matches the a
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Decision Code Results</title>
 </head>
-<body style="margin:0; padding:0; font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #f0f0f0; background-color: #000000;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #000000; padding: 40px 20px;">
+<body style="margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #ffffff; background-color: #030303;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #030303; padding: 40px 20px;">
     <tr>
       <td align="center">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 480px; background-color: #0d0d0d; border-radius: 12px; border: 1px solid rgba(178, 148, 82, 0.4);">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 520px; background-color: rgba(255,255,255,0.03); border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);">
           <tr>
-            <td style="padding: 28px 32px 24px 32px; border-bottom: 1px solid rgba(178, 148, 82, 0.35);">
-              <h1 style="margin: 12px 0 0 0; font-size: 24px; font-weight: 700; color: #f0f0f0; letter-spacing: 0.02em; font-family: Georgia, serif;">Your decision profile</h1>
+            <td style="padding: 28px 32px 24px 32px; border-bottom: 1px solid rgba(255,255,255,0.06);">
+              <p style="margin:0 0 6px 0; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #E8B4B8;">The Decision Code</p>
+              <h1 style="margin: 0; font-size: 24px; font-weight: 400; color: #ffffff; letter-spacing: 0.02em; font-family: Georgia, 'Times New Roman', serif;">Your decision profile</h1>
             </td>
           </tr>
           <tr>
             <td style="padding: 28px 32px 0 32px;">
-              <p style="margin:0 0 16px 0; font-size: 17px; font-weight: 600; color: #f0f0f0;">Hi {{contact.first_name}},</p>
-              <p style="margin:0 0 24px 0; font-size: 16px; color: #a8a8a8; line-height: 1.65;">Thanks for taking The Decision Code. Here's your decision profile.</p>
+              <p style="margin:0 0 16px 0; font-size: 17px; font-weight: 500; color: #ffffff;">Hi {{contact.first_name}},</p>
+              <p style="margin:0 0 24px 0; font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.65;">Thanks for taking The Decision Code. Here's your decision profile.</p>
             </td>
           </tr>
           <tr>
             <td style="padding: 0 32px 24px 32px;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: rgba(255,255,255,0.04); border-radius: 12px; border-left: 3px solid #b29452;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: rgba(255,255,255,0.04); border-radius: 12px; border-left: 3px solid #E8B4B8;">
                 <tr>
                   <td style="padding: 20px 24px;">
-                    <p style="margin:0 0 4px 0; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #b29452;">Your result</p>
-                    <p style="margin:0; font-size: 22px; font-weight: 700; color: #f0f0f0; font-family: Georgia, serif;">{{contact.readiness_score}}</p>
-                    <p style="margin: 14px 0 0 0; font-size: 14px; line-height: 1.65; color: #f0f0f0;">{{contact.readiness_result}}</p>
+                    <p style="margin:0 0 4px 0; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #E8B4B8;">Your result</p>
+                    <p style="margin:0; font-size: 22px; font-weight: 400; color: #ffffff; font-family: Georgia, serif;">{{contact.readiness_score}}</p>
+                    <p style="margin: 14px 0 0 0; font-size: 14px; line-height: 1.65; color: #ffffff;">{{contact.readiness_result}}</p>
                   </td>
                 </tr>
               </table>
@@ -57,11 +60,11 @@ Use this in the **HTML body** field of your GHL Send Email action. Matches the a
           </tr>
           <tr>
             <td style="padding: 0 32px 32px 32px;">
-              <p style="margin:0 0 24px 0; font-size: 16px; color: #a8a8a8; line-height: 1.65;">No pitch — just clarity. When you're ready to explore next steps, we'll be here.</p>
+              <p style="margin:0 0 24px 0; font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.65;">No pitch — just clarity. When you're ready to explore next steps, we'll be here.</p>
             </td>
           </tr>
         </table>
-        <p style="margin: 28px 0 0 0; font-size: 12px; color: #666;">You received this because you completed The Decision Code.</p>
+        <p style="margin: 28px 0 0 0; font-size: 12px; color: rgba(255,255,255,0.4);">You received this because you completed The Decision Code · Misty Lavertu</p>
       </td>
     </tr>
   </table>
@@ -76,14 +79,15 @@ Use this in the **HTML body** field of your GHL Send Email action. Matches the a
 ```
 Hi {{contact.first_name}},
 
-Thanks for taking the assessment. Here's what your score means:
+Thanks for taking The Decision Code. Here's your decision profile.
 
-Your score: {{contact.readiness_score}}
+Your result: {{contact.readiness_score}}
 
 {{contact.readiness_result}}
 
 No pitch — just clarity. When you're ready to explore next steps, we'll be here.
 
+— Misty Lavertu
 ```
 
 ---

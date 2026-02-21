@@ -2,7 +2,7 @@
   "name": "misty-assessment",
   "private": true,
   "scripts": {
-    "dev": "serve . -l 3000",
+    "dev": "npx serve . -l 3000",
     "dev:full": "vercel dev"
   },
   "devDependencies": {
