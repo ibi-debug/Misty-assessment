@@ -249,35 +249,35 @@ module.exports = async function handler(req, res) {
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Your Decision Code Results</title></head>
-<body style="margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #ffffff; background-color: #030303;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #030303; padding: 40px 20px;">
+<body style="margin:0; padding:0; font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 16px; line-height: 1.65; color: #1a1a1a; background-color: #faf8f5;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #faf8f5; padding: 40px 20px;">
     <tr>
       <td align="center">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 520px; background-color: rgba(255,255,255,0.03); border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 560px; background-color: #f5f2ef; border: 1px solid rgba(26,26,26,0.12);">
           <tr>
-            <td style="padding: 28px 32px 24px 32px; border-bottom: 1px solid rgba(255,255,255,0.06);">
-              <p style="margin:0 0 6px 0; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #E8B4B8;">The Decision Code</p>
-              <h1 style="margin: 0; font-size: 24px; font-weight: 400; color: #ffffff; letter-spacing: 0.02em; font-family: Georgia, 'Times New Roman', serif;">Your decision profile</h1>
+            <td style="padding: 28px 32px 24px 32px; border-bottom: 1px solid rgba(26,26,26,0.12);">
+              <p style="margin:0 0 6px 0; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #691818;">The Decision Code</p>
+              <h1 style="margin: 0; font-size: 28px; font-weight: 500; color: #1a1a1a; letter-spacing: -0.02em; font-family: Georgia, 'Times New Roman', serif; line-height: 1.1;">Your decision profile</h1>
             </td>
           </tr>
           <tr>
             <td style="padding: 28px 32px 0 32px;">
-              <p style="margin:0 0 16px 0; font-size: 17px; font-weight: 500; color: #ffffff;">Hi ${nameSafe},</p>
-              <p style="margin:0 0 24px 0; font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.65;">Thanks for taking The Decision Code. Here's your decision profile.</p>
+              <p style="margin:0 0 16px 0; font-size: 17px; font-weight: 600; color: #1a1a1a;">Hi ${nameSafe},</p>
+              <p style="margin:0 0 24px 0; font-size: 16px; color: #4a342e; line-height: 1.65;">Thanks for taking The Decision Code. Here&rsquo;s your decision profile.</p>
             </td>
           </tr>
           <tr>
             <td style="padding: 0 32px 24px 32px;">
-              <div style="background-color: rgba(255,255,255,0.04); border-radius: 12px; border-left: 3px solid #E8B4B8; padding: 20px 24px; font-size: 15px; line-height: 1.65; color: #ffffff; white-space: pre-wrap;">${copyEscaped}</div>
+              <div style="background-color: #faf8f5; border: 1px solid rgba(26,26,26,0.12); border-left: 3px solid #691818; padding: 20px 24px; font-size: 15px; line-height: 1.65; color: #1a1a1a; white-space: pre-wrap;">${copyEscaped}</div>
             </td>
           </tr>
           <tr>
             <td style="padding: 0 32px 32px 32px;">
-              <p style="margin:0 0 24px 0; font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.65;">No pitch — just clarity. When you're ready to explore next steps, we'll be here.</p>
+              <p style="margin:0 0 24px 0; font-size: 16px; color: #4a342e; line-height: 1.65;">No pitch &mdash; just clarity. When you&rsquo;re ready to explore next steps, we&rsquo;ll be here.</p>
             </td>
           </tr>
         </table>
-        <p style="margin: 28px 0 0 0; font-size: 12px; color: rgba(255,255,255,0.4);">You received this because you completed The Decision Code · Misty Lavertu</p>
+        <p style="margin: 28px 0 0 0; font-size: 12px; color: #4a342e; letter-spacing: 0.12em; text-transform: uppercase;">&copy; 2026 Misty Lavertu &middot; Decision-Led Leadership</p>
       </td>
     </tr>
   </table>
