@@ -103,3 +103,32 @@ To pass the score and result text into the email:
 3. In your workflow email template, use the merge fields for those custom fields.
 
 **API:** The handler uses the GoHighLevel **v2** API (`https://services.leadconnectorhq.com`, `Version: 2021-07-28`). Use a **Private Integration Token** (Sub-Account) or the location’s OAuth access token.
+
+---
+
+## Troubleshooting: automation not working
+
+### GoHighLevel (GHL)
+
+1. **Workflow trigger uses the wrong tag**  
+   The API adds the tag **`The Decision Code`** (not "Misty Assessment"). If your workflow is triggered by **"Contact Tag Added"**, the trigger tag in GHL must be **"The Decision Code"**.  
+   - In GHL: Workflows → your assessment workflow → Trigger → set tag to **The Decision Code**.
+
+2. **Using "Contact Added to Workflow"**  
+   If you use this trigger, the API must add the contact to that workflow. In Netlify (or your host), set **`GHL_WORKFLOW_ID`** to the workflow’s ID (from the workflow URL in GHL). If the ID is wrong or the workflow was recreated, update the env var.
+
+3. **Env vars**  
+   For GHL, ensure **`EMAIL_PROVIDER=ghl`**, **`GHL_API_KEY`** (or **`GHL_ACCESS_TOKEN`**), and **`GHL_LOCATION_ID`** are set. Expired or wrong keys cause 401/403 and the submission will fail with “Failed to send results.”
+
+4. **Custom fields / empty email content**  
+   If the results email sends but score/result are blank, set **`GHL_CUSTOM_FIELD_SCORE_ID`** and **`GHL_CUSTOM_FIELD_RESULT_ID`** to your GHL custom field IDs and use the matching merge fields in the workflow email template.
+
+### Resend
+
+- Confirm **`RESEND_API_KEY`** is set and valid.
+- Check Resend dashboard for bounces or blocks.
+
+### Submissions not reaching the API
+
+- Open the assessment, complete it, and submit. In the browser DevTools → Network tab, find the POST to `/.netlify/functions/submit-assessment`. Check status (200 vs 4xx/5xx) and the response body for `error` or `detail`.
+- If the request fails (CORS, 404, or 500), fix the deploy or env vars; the automation (GHL or Resend) only runs after the API receives a valid POST.

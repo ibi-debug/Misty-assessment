@@ -24,8 +24,25 @@
       </div>
     </section>
 
-    <!-- Step 1: Lead capture -->
-    <section class="step step-lead" id="step-lead" data-step="1">
+    <!-- Step 1: Questions first (must match app.js step indices) -->
+    <section class="step step-pulse" id="step-pulse" data-step="1">
+      <div class="card pulse-inner">
+        <div class="pulse-progress" aria-hidden="true">
+          <span class="pulse-progress-text" id="pulse-progress-text">1 of 10</span>
+          <div class="pulse-progress-bar"><div class="pulse-progress-fill" id="pulse-progress-fill"></div></div>
+        </div>
+        <p class="pulse-prompt" id="pulse-prompt">Choose the option that fits you best</p>
+        <p class="pulse-statement" id="pulse-statement"></p>
+        <div class="pulse-options" id="pulse-options" role="radiogroup" aria-label="Answer options"></div>
+        <div class="pulse-actions">
+          <button type="button" class="btn btn-ghost" id="btn-pulse-back">Back</button>
+          <button type="button" class="btn btn-primary" id="btn-pulse-next">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 2: Lead capture after questions -->
+    <section class="step step-lead" id="step-lead" data-step="2">
       <div class="card lead-inner">
         <p class="lead-label">Where should we send your decision profile?</p>
         <form id="decision-code-form" novalidate>
@@ -46,24 +63,7 @@
       </div>
     </section>
 
-    <!-- One question at a time (10 multiple-choice) -->
-    <section class="step step-pulse" id="step-pulse" data-step="2">
-      <div class="card pulse-inner">
-        <div class="pulse-progress" aria-hidden="true">
-          <span class="pulse-progress-text" id="pulse-progress-text">1 of 10</span>
-          <div class="pulse-progress-bar"><div class="pulse-progress-fill" id="pulse-progress-fill"></div></div>
-        </div>
-        <p class="pulse-prompt" id="pulse-prompt">Choose the option that fits you best</p>
-        <p class="pulse-statement" id="pulse-statement"></p>
-        <div class="pulse-options" id="pulse-options" role="radiogroup" aria-label="Answer options"></div>
-        <div class="pulse-actions">
-          <button type="button" class="btn btn-ghost" id="btn-pulse-back">Back</button>
-          <button type="button" class="btn btn-primary" id="btn-pulse-next">Next</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Submit -->
+    <!-- Step 3: Submit -->
     <section class="step step-submit" id="step-submit" data-step="3">
       <div class="card submit-inner">
         <p class="submit-label">You're done</p>
